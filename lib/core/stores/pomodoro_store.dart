@@ -9,13 +9,13 @@ enum TimerModes { work, rest }
 
 abstract class _PomodoroStore with Store {
   @observable
-  int workTime = 1;
+  int workTime = 30;
 
   @observable
-  int restTime = 1;
+  int restTime = 5;
 
   @observable
-  int minutes = 2;
+  int minutes = 30;
 
   @observable
   int seconds = 0;
