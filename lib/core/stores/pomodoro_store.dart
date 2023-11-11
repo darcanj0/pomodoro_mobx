@@ -63,26 +63,40 @@ abstract class _PomodoroStore with Store {
     }
   }
 
+  bool get canChangeWorkTime {
+    if (isRunning) {
+      return mode != TimerModes.work;
+    }
+    return true;
+  }
+
+  bool get canChangeRestTime {
+    if (isRunning) {
+      return mode != TimerModes.rest;
+    }
+    return true;
+  }
+
   @action
   void incrementWorkTime() {
-    workTime++;
+    if (canChangeWorkTime) workTime++;
   }
 
   @action
   void decrementWorkTime() {
     if (workTime == 0) return;
-    workTime--;
+    if (canChangeWorkTime) workTime--;
   }
 
   @action
   void incrementRestTime() {
-    restTime++;
+    if (canChangeRestTime) restTime++;
   }
 
   @action
   void decrementRestTime() {
     if (restTime == 0) return;
-    restTime--;
+    if (canChangeRestTime) restTime--;
   }
 
   void _changeMode() {

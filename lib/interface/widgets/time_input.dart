@@ -10,8 +10,8 @@ class TimeInput extends StatelessWidget {
 
   final String title;
   final int minutes;
-  final void Function() increment;
-  final void Function() decrement;
+  final void Function()? increment;
+  final void Function()? decrement;
 
   @override
   Widget build(BuildContext context) {

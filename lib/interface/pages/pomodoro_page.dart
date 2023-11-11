@@ -10,6 +10,7 @@ class PomodoroPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final store = Provider.of<PomodoroStore>(context);
     return Scaffold(
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -21,26 +22,32 @@ class PomodoroPage extends StatelessWidget {
             padding: const EdgeInsets.symmetric(
               vertical: 20,
             ),
-            child: Consumer<PomodoroStore>(builder: (ctx, store, __) {
-              return Observer(builder: (_) {
-                return Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceAround,
-                  children: [
-                    TimeInput(
-                      title: 'Work',
-                      minutes: store.workTime,
-                      increment: store.incrementWorkTime,
-                      decrement: store.decrementWorkTime,
-                    ),
-                    TimeInput(
-                      title: 'Rest',
-                      minutes: store.restTime,
-                      increment: store.incrementRestTime,
-                      decrement: store.decrementRestTime,
-                    )
-                  ],
-                );
-              });
+            child: Observer(builder: (_) {
+              return Row(
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                children: [
+                  TimeInput(
+                    title: 'Work',
+                    minutes: store.workTime,
+                    increment: store.canChangeWorkTime
+                        ? store.incrementWorkTime
+                        : null,
+                    decrement: store.canChangeWorkTime
+                        ? store.decrementWorkTime
+                        : null,
+                  ),
+                  TimeInput(
+                    title: 'Rest',
+                    minutes: store.restTime,
+                    increment: store.canChangeRestTime
+                        ? store.incrementRestTime
+                        : null,
+                    decrement: store.canChangeRestTime
+                        ? store.decrementRestTime
+                        : null,
+                  )
+                ],
+              );
             }),
           )
         ],
