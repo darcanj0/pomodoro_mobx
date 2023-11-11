@@ -1,8 +1,19 @@
 import 'package:flutter/material.dart';
+import 'package:pomodoro_mobx/core/stores/pomodoro_store.dart';
 import 'package:pomodoro_mobx/interface/pages/pomodoro_page.dart';
+import 'package:provider/provider.dart';
 
 void main() {
-  runApp(const PomodoroApp());
+  runApp(
+    MultiProvider(
+      providers: [
+        Provider(
+          create: (context) => PomodoroStore(),
+        )
+      ],
+      child: const PomodoroApp(),
+    ),
+  );
 }
 
 class PomodoroApp extends StatelessWidget {

@@ -1,10 +1,17 @@
 import 'package:flutter/material.dart';
 
 class TimeInput extends StatelessWidget {
-  const TimeInput({super.key, required this.title, required this.minutes});
+  const TimeInput(
+      {super.key,
+      required this.title,
+      required this.minutes,
+      required this.increment,
+      required this.decrement});
 
   final String title;
   final int minutes;
+  final void Function() increment;
+  final void Function() decrement;
 
   @override
   Widget build(BuildContext context) {
@@ -22,9 +29,9 @@ class TimeInput extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             ElevatedButton(
-              onPressed: () {},
+              onPressed: decrement,
               style: ElevatedButton.styleFrom(
-                shape: CircleBorder(),
+                shape: const CircleBorder(),
                 backgroundColor: Colors.redAccent,
               ),
               child: const Icon(
@@ -33,13 +40,13 @@ class TimeInput extends StatelessWidget {
               ),
             ),
             Text(
-              '${minutes} min',
+              '$minutes min',
               style: const TextStyle(
                 fontSize: 18,
               ),
             ),
             ElevatedButton(
-              onPressed: () {},
+              onPressed: increment,
               style: ElevatedButton.styleFrom(
                 shape: const CircleBorder(),
                 backgroundColor: Colors.greenAccent,
